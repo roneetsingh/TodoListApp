@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Text } from "react-native";
 import Header from "./Header";
+import InputModal from "./InputModal";
 import ListItems from "./ListItems";
 
 const Home = () => {
@@ -23,12 +24,25 @@ const Home = () => {
 
     const [todos, setTodos] = useState(initialTodos);
     
+    const handleClearTodos = () => {
+        setTodos([]);
+    }
+
+    const [modalVisible, setModalVisible] = useState(false);
+    const [todoInputValue, setTodoInputValue] = useState();
+
     return(
         <>
-        <Header/>
+        <Header handleClearTodos={handleClearTodos} />
         <ListItems
             todos={todos}
             setTodos={setTodos}
+        />
+        <InputModal
+            modalVisible={modalVisible}
+            setModalVisible={setModalVisible}
+            todoInputValue={todoInputValue}
+            setTodoInputValue={setTodoInputValue}
         />
         </>
     );
