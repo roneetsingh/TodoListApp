@@ -126,7 +126,7 @@ export const ModalContainer = styled.View`
 export const ModalView = styled.View`
   background-color: ${colors.secondary};
   border-radius: 20px;
-  padding: 35px;
+  padding: 15px;
 `;
 
 export const StyledInput = styled.TextInput`

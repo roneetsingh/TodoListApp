@@ -5,7 +5,7 @@ import { Entypo } from "@expo/vector-icons";
 const Header = ({handleClearTodos}) => {
     return(
         <HeaderView>
-            <HeaderTitle>ToDo List</HeaderTitle>
+            <HeaderTitle>To-Do List</HeaderTitle>
             <HeaderButton
                 onPress={handleClearTodos}
             >

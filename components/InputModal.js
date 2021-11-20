@@ -1,16 +1,22 @@
 import React from "react";
 import { AntDesign } from '@expo/vector-icons';
-import { colors, ModalAction, ModalActionGroup, ModalButton, ModalContainer, ModalIcon, ModalView, StyledInput } from "../styles/appStyles";
+import { colors, HeaderTitle, ModalAction, ModalActionGroup, ModalButton, ModalContainer, ModalIcon, ModalView, StyledInput } from "../styles/appStyles";
 import { Modal } from "react-native";
 
-const InputModal = ({modalVisible, setModalVisible, todoInputvalue, setTodoInputValue}) => {
+const InputModal = ({modalVisible, setModalVisible, todoInputValue, setTodoInputValue, handleAddTodo, todos}) => {
     
     const handleCloseModal = () => {
         setModalVisible(false);
+        setTodoInputValue("");
     }
 
     const handleSubmit = () => {
-        alert("Submitted")
+        handleAddTodo({
+            title: todoInputValue,
+            date: new Date().toLocaleTimeString(),
+            key: `${(todos[todos.length-1] && parseInt(todos[todos.length-1].key)+1) || 1}` 
+        });
+        setTodoInputValue("");
     }
     
     return (
@@ -25,19 +31,18 @@ const InputModal = ({modalVisible, setModalVisible, todoInputvalue, setTodoInput
             >
                 <ModalContainer>
                     <ModalView>
-
-                    
-                    <ModalIcon>
-                    <AntDesign name="edit" size={30} color={colors.tertiary}/>
+                        <ModalIcon>
+                            <HeaderTitle>To-Do</HeaderTitle>
+                            <AntDesign name="edit" size={30} color={colors.tertiary}/>
                     </ModalIcon>
 
                     <StyledInput
-                        placeholder="Add a ToDo"
+                        placeholder="Add a To-Do"
                         placeholderTextColor={colors.alternative}
                         selectionColor={colors.secondary}
                         autoFocus={true}
                         onChangeText={(text) => setTodoInputValue(text)}
-                        value={todoInputvalue}
+                        value={todoInputValue}
                         onSubmitEditing={handleSubmit}
                     />
 

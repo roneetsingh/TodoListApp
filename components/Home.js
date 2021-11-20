@@ -31,18 +31,31 @@ const Home = () => {
     const [modalVisible, setModalVisible] = useState(false);
     const [todoInputValue, setTodoInputValue] = useState();
 
+    const handleAddTodo = (todo) => {
+        const newTodos =[...todos, todo];
+        setTodos(newTodos);
+        setModalVisible(false);
+    }
+
+    const handleTriggerEdit = () => {
+        alert("Edit Triggered");
+    }
+
     return(
         <>
         <Header handleClearTodos={handleClearTodos} />
         <ListItems
             todos={todos}
             setTodos={setTodos}
+            handleTriggerEdit={handleTriggerEdit}
         />
         <InputModal
             modalVisible={modalVisible}
             setModalVisible={setModalVisible}
             todoInputValue={todoInputValue}
             setTodoInputValue={setTodoInputValue}
+            handleAddTodo={handleAddTodo}
+            todos={todos}
         />
         </>
     );
