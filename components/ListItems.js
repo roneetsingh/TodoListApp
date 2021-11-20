@@ -4,7 +4,7 @@ import { SwipeListView } from "react-native-swipe-list-view";
 import { colors, HiddenButton, ListView, ListViewHidden, SwipedTodoText, TodoDate, TodoText } from "../styles/appStyles";
 import { Entypo } from "@expo/vector-icons";
 
-const ListItems = ({todos, setTools}) => {
+const ListItems = ({todos, setTodos}) => {
 
     const [swipedRow, setSwipedRow] = useState(null);
 
@@ -14,7 +14,12 @@ const ListItems = ({todos, setTools}) => {
             renderItem={(data) => {
                 const RowText = data.item.key == swipedRow ? SwipedTodoText : TodoText;
                 return(
-                    <ListView>
+                    <ListView
+                        underlayColor={colors.primary}
+                        onPress={() => {
+                            
+                        }}
+                    >
                         <>
                             <RowText>{data.item.title}</RowText>
                             <TodoDate>{data.item.date}</TodoDate>
@@ -39,6 +44,12 @@ const ListItems = ({todos, setTools}) => {
             showsVerticalScrollIndicator={false}
             style={{
                 flex: 1, paddingBottom: 30,marginBottom: 40
+            }}
+            onRowOpen={(rowKey) => {
+                setSwipedRow(rowKey);
+            }}
+            onRowClose={() => {
+                setSwipedRow(null);
             }}
         />
     );
