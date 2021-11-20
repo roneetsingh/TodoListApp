@@ -1,6 +1,5 @@
 import React from "react";
 import { colors, HeaderButton, HeaderTitle, HeaderView } from "../styles/appStyles";
-
 import { Entypo } from "@expo/vector-icons";
 
 const Header = () => {
