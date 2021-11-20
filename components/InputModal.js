@@ -3,19 +3,29 @@ import { AntDesign } from '@expo/vector-icons';
 import { colors, HeaderTitle, ModalAction, ModalActionGroup, ModalButton, ModalContainer, ModalIcon, ModalView, StyledInput } from "../styles/appStyles";
 import { Modal } from "react-native";
 
-const InputModal = ({modalVisible, setModalVisible, todoInputValue, setTodoInputValue, handleAddTodo, todos}) => {
+const InputModal = ({modalVisible, setModalVisible, todoInputValue, setTodoInputValue, handleAddTodo,todoToBeEdited, setTodoToBeEdited, handleEditTodo,todos}) => {
     
     const handleCloseModal = () => {
         setModalVisible(false);
         setTodoInputValue("");
+        setTodoToBeEdited(null);
     }
 
     const handleSubmit = () => {
-        handleAddTodo({
-            title: todoInputValue,
-            date: new Date().toLocaleTimeString(),
-            key: `${(todos[todos.length-1] && parseInt(todos[todos.length-1].key)+1) || 1}` 
-        });
+
+        if(!todoToBeEdited){
+                handleAddTodo({
+                title: todoInputValue,
+                date: new Date().toLocaleString(),
+                key: `${(todos[todos.length-1] && parseInt(todos[todos.length-1].key)+1) || 1}` 
+            });
+        } else {
+            handleEditTodo({
+                title: todoInputValue,
+                date: todoToBeEdited.date,
+                key: todoToBeEdited.key
+            })
+        }
         setTodoInputValue("");
     }
     
