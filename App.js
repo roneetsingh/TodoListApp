@@ -12,23 +12,27 @@ export default function App() {
   
   const [ready, setReady] = useState(false);
 
-  const initialTodos = [{
-    title: "Get some snacks",
-    date: "Fri, 21 Nov 2021 01:37 AM IST",
-    key: "1"
-},
-{
-    title: "Get some code",
-    date: "Fri, 21 Nov 2021 01:37 AM IST",
-    key: "2"
-},
-{
-    title: "Get some sense",
-    date: "Fri, 21 Nov 2021 01:37 AM IST",
-    key: "3"
-}]
+  const initialTodos = [];
 
-const [todos, setTodos] = useState(initialTodos);
+  const [todos, setTodos] = useState(initialTodos);
+
+  const LoadTodos = () => {
+    AsyncStorage.getItem("storedTodos").then(data => {
+      if(data !== null) {
+        setTodos(JSON.parse(data))
+      }
+    }).catch((error) => console.log(erorr));
+  }
+
+  if(!ready) {
+    return (
+      <AppLoading
+        startAsync={LoadTodos}
+        onFinish={() => setReady(true)}
+        onError={console.warn}
+      />
+    )
+  }
   
   return (
     <Container>

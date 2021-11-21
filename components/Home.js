@@ -1,5 +1,5 @@
+import AsyncStorage from "@react-native-async-storage/async-storage";
 import React, { useState } from "react";
-import { Text } from "react-native";
 import Header from "./Header";
 import InputModal from "./InputModal";
 import ListItems from "./ListItems";
@@ -7,7 +7,9 @@ import ListItems from "./ListItems";
 const Home = ({todos, setTodos}) => {
     
     const handleClearTodos = () => {
-        setTodos([]);
+       AsyncStorage.setItem("storedTodos", JSON.stringify([])).then(() => {
+            setTodos([]);
+        }).catch(error => console.log(error))
     }
 
     const [modalVisible, setModalVisible] = useState(false);
@@ -15,8 +17,10 @@ const Home = ({todos, setTodos}) => {
 
     const handleAddTodo = (todo) => {
         const newTodos =[...todos, todo];
-        setTodos(newTodos);
-        setModalVisible(false);
+        AsyncStorage.setItem("storedTodos", JSON.stringify(newTodos)).then(() => {
+            setTodos(newTodos);
+            setModalVisible(false);
+        }).catch(error => console.log(error))
     }
 
     const [todoToBeEdited, setTodoToBeEdited] = useState(null);
@@ -31,9 +35,12 @@ const Home = ({todos, setTodos}) => {
         const newTodos = [...todos];
         const todoIndex = todos.findIndex((todo) => todo.key === editedTodo.key);
         newTodos.splice(todoIndex, 1, editedTodo);
-        setTodos(newTodos);
-        setTodoToBeEdited(null);
-        setModalVisible(false);
+        
+        AsyncStorage.setItem("storedTodos", JSON.stringify(newTodos)).then(() => {
+            setTodos(newTodos);
+            setModalVisible(false);
+            setTodoToBeEdited(null);
+        }).catch(error => console.log(error))
     }
 
     return(
