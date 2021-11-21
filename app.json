@@ -1,12 +1,12 @@
 {
   "expo": {
-    "name": "todoApp",
+    "name": "To-Do List",
     "slug": "todoApp",
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./assets/icon.png",
+    "icon": "./assets/App.Icon.png",
     "splash": {
-      "image": "./assets/splash.png",
+      "image": "./assets/Splash.Biggest.png",
       "resizeMode": "contain",
       "backgroundColor": "#ffffff"
     },
@@ -26,7 +26,7 @@
       }
     },
     "web": {
-      "favicon": "./assets/favicon.png"
+      "favicon": "./assets/Web.Icon.png"
     }
   }
 }
